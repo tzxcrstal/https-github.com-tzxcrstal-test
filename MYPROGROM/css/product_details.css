@@ -1,0 +1,236 @@
+/*页面总宽度*/
+.main{
+	width:1000px;
+}
+/*面包屑*/
+.bread_crumb{
+	margin-top:20px;
+	font-size:18px;
+	color:#ddd;
+	margin-bottom:20px;
+	font-weight:600;
+}
+/*商品图片*/
+.main .product_details .preview{
+	width:400px;
+	position:relative;
+}
+.product_details .mediumDiv{
+	border:1px solid #ddd;
+	width:350px;
+	height:350px;
+	text-align:center;
+	position:relative;
+	margin-bottom:5px;
+	border:1px solid #ddd;
+}
+ .preview>.mediumDiv>.mask{
+	position:absolute;
+	width:175px;
+	height:175px;
+	background:#ffa;
+	opacity:0.5;
+	top:0;
+	left:0;
+	display:none
+}
+.preview>.mediumDiv> img{
+	vertical-align:middle;
+	width:350px;
+	height:350px;
+}
+ .preview>.mediumDiv>.superMask{
+	 position: absolute;
+	 width: 350px;
+	 height: 350px;
+	 opacity: 0;
+	 top: 0;
+	 left:0;
+	 cursor: move;
+}
+ .preview h1{
+	 width:352px;
+	 heigth:54px;
+	 overflow:hidden;
+	 padding:0px;
+	 position:relative;
+ }
+/*放大后的图片*/
+.preview>.largeDiv{
+	position:absolute;
+	width:400px;
+	height:400px;
+	background:#fff;
+	border:1px solid #ddd;
+	top:0;
+	left:355px;
+	z-index:999;
+	display:none;
+}
+
+/*前后移动的按钮*/
+ .preview a.backward,.preview a.forward{
+     width: 17px;
+     height: 54px;
+     background-image: url(../img/iconlist_1.png);
+     background-repeat: no-repeat;
+     display:block;
+     z-index:20;
+     position:absolute;
+     top:0px;
+ }
+ .preview a.backward{
+     left:0px;
+
+ }
+ .preview a.forward{
+     right:0px;
+ }
+ .preview a.backward {
+     background-position: 0px -139px;
+ }
+ .preview a.backward:hover {
+     background-position: -34px -139px;
+ }
+ .preview a.backward.disabled {
+     background-position: -68px -139px;
+ }
+ .preview a.forward {
+     background-position: -17px -139px;
+ }
+.preview a.forward:hover {
+     background-position: -51px -139px;
+ }
+ .preview a.forward.disabled {
+     background-position: -85px -139px;
+ }
+.icon_list{
+	display:flex;
+
+}
+.preview .icon_list li img{
+	width:50px;
+	height:50px;
+	padding:1px;
+	border:1px solid #CECFCE;
+
+}
+.preview .icon_list li img:hover{
+	border:2px solid #e4393c;
+	padding:0;
+}
+.icon_list li{margin-left:11px}
+/*右边价格 作家的介绍*/
+
+.show_details{
+	width:594px;
+	font-family: "微软雅黑";
+}
+.show_details ,h3 a,div.price ,.writer p{
+	margin-bottom:10px;
+	padding:3px;
+}
+.show_details h2{
+	padding:3px;
+	margin-bottom:10px;
+}
+.show_details h3{margin-bottom:10px}
+.show_details h2 a{color: #0AA1ED}
+.show_details div.price{
+	border:1px solid red;
+	width:100px;
+	height:20px;
+	padding:2px 2px;
+	margin-left:5px;
+	text-align:center;
+	line-height:20px;
+	color:red;
+}
+/*为你推荐*/
+ .recommend{
+	margin-top:20px;
+	border:1px solid #ddd;
+}
+ .recommend>p{
+	font-size:18px;
+	font-weight:900;
+	 margin:10px 0px;
+	 line-height:18px;
+}
+ .recommend>p>span{
+	font-size:14px;
+	margin-left:10px;
+	background:#333;
+	 color:#fff;
+	 padding:3px 3px;
+}
+.details_1{margin-left:55px;}
+ .details_1 p{
+	 font-size:14px;
+ 	text-align:center;
+ }
+.show-details .recommend .indemo p{
+	font-size:14px;
+	font-weight:900;
+	text-align:center;
+	margin-top:10px;
+}
+.show-details .recommend .indemo{
+	border:1px solid #ddd;
+	margin:10px 0;
+	padding:10px 0;
+}
+/*购买部分*/
+ .account .number-reduce,.number-add{
+	width:40px;
+	height:40px;
+}
+.account input{
+	width:10px;
+	height:40px;
+	outline:none;
+	border:1px solid #ddd;
+}
+ .account .number-add{
+	margin:0px 0px;
+}
+div.shops a{
+/*	display:inline-block;*/
+	width:30px;
+	height:44px;
+	line-height:50px;
+	text-align:center;
+	border:1px solid #ddd;
+	font-size:20px;
+	
+}
+ .shops .buy{
+	color:#0aa1ed;
+	border-radius:2px;
+	background:linear-gradient(to bottom,#f0f0f0,#e0e0e0);
+	padding:8px 28px;
+}
+.shops .cart{
+	 background:linear-gradient(to bottom,#27b0f6,#0aa1ed);
+	color:#fff;
+	border-radius:2px;
+	padding:8px 8px;
+}
+.shops .collection{
+	display: block;	
+	top:-49px;
+	left:290px;
+	width:45px;
+	background:#0aa1ed;
+	position:relative;
+	color:#fff;
+	font-size:12px;
+	text-align:center;
+
+}
+.shops .collection img{
+	position:absolute;
+	top:2px; 
+	left:15px;
+	
+}

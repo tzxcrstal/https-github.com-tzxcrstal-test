@@ -1,0 +1,127 @@
+SET NAMES UTF8;
+DROP DATABASE IF EXISTS ty;
+CREATE DATABASE ty CHARSET=UTF8;
+USE ty;
+/**书籍型号**/
+CREATE TABLE ty_book_family(
+  fid INT PRIMARY KEY AUTO_INCREMENT,
+  fname VARCHAR(32)
+);
+/**商品书籍**/
+CREATE TABLE ty_book(
+    bid INT PRIMARY KEY AUTO_INCREMENT,
+    title VARCHAR,              #主标题
+    subtitle  VARCHAR,          #副标题
+    writer  VARCHAR(64),        #作者
+    publisher  VARCHAR(32),         #出版名称
+    price    DECIMAL(10，2),    #价格
+
+    shelf_time BIGINT,          #上架时间
+    sold_count INT,             #已售出的数量
+    is_onsale BOOLEAN         #是否促销中
+);
+
+/**书籍的图片**/
+CREATE TABLE ty_book_pic(
+    pid INT PRIMARY KEY AUTO_INCREMENT,
+     bid INT,                    #书编号
+     sm VARCHAR(128),            #小图片路径
+     md VARCHAR(128),            #中图片路径
+     lg VARCHAR(128)             #大图片路径
+);
+
+/**用户信息**/
+CREATE TABLE ty_user(
+     uid INT PRIMARY KEY AUTO_INCREMENT,
+      uname VARCHAR(32),
+      upwd VARCHAR(32),
+      email VARCHAR(64),
+      phone VARCHAR(16),
+
+      avatar VARCHAR(128),        #头像图片路径
+      user_name VARCHAR(32),      #用户名，如王小明
+      gender INT                  #性别  0-女  1-男
+);
+/**收货地址信息**/
+CREATE TABLE ty_receiver_address(
+    aid INT PRIMARY KEY AUTO_INCREMENT,
+     uid INT,                #用户编号
+     receiver VARCHAR(16),       #接收人姓名
+     province VARCHAR(16),       #省
+     city VARCHAR(16),           #市
+     county VARCHAR(16),         #县
+     address VARCHAR(128),       #详细地址
+     cellphone VARCHAR(16),      #手机
+     fixedphone VARCHAR(16),     #固定电话
+     postcode CHAR(6),           #邮编
+     tag VARCHAR(16),            #标签名
+
+     is_default BOOLEAN          #是否为当前用户的默认收货地址
+);
+
+/**购物车条目**/
+CREATE TABLE ty_shoppingcart_item(
+  iid INT PRIMARY KEY AUTO_INCREMENT,
+   uid INT,      #用户编号
+   bid INT,   #商品编号
+   count INT,        #购买数量
+   is_checked BOOLEAN #是否已勾选，确定购买
+);
+/**用户订单**/
+CREATE TABLE ty_order(
+   oid INT PRIMARY KEY AUTO_INCREMENT,
+    uid INT,
+    aid INT,
+    status INT,             #订单状态  1-等待付款  2-等待发货  3-运输中  4-已签收  5-已取消
+    order_time BIGINT,      #下单时间
+    pay_time BIGINT,        #付款时间
+    deliver_time BIGINT,    #发货时间
+    received_time BIGINT    #签收时间
+  )AUTO_INCREMENT=10000000;
+
+/**用户订单**/
+CREATE TABLE ty_order_detail(
+   did INT PRIMARY KEY AUTO_INCREMENT,
+    oid INT,           #订单编号
+    bid INT,         #产品编号
+    count INT               #购买数量
+);
+/*******************/
+/******数据导入******/
+/*******************/
+/**书型号家族**/
+INSERT INTO ty_book_family VALUES
+(NULL,'科学'),
+(NULL,'历史'),
+(NULL,'地理'),
+(NULL,'语文'),
+(NULL,'美术'),
+(NULL,'英语'),
+(NULL,'医学')
+/**商品书籍**/
+INSERT INTO ty_book VALUES
+(NULL,'科学全知道','(禹田文化出品）美国图书馆协会力荐！完美融入“授之以鱼不如授之以渔”的先进教育理念，以风趣的故事形式带领孩子体验科学的方方面面，播下“会探索、爱发现”的种子，在真切的指导中获得多项能力的提升! 童书畅销榜5折封顶>>','作者:[美]弗兰·马努斯基，[美]珍妮弗·达斯林　等著，筱舟，魏亚西　等译','出版社:云南出版集团公司 晨光出版社',57,150123456789,2,true),
+(NULL,'写给儿童的中国历史（全14册）','第十届文津奖获奖图书，畅销台湾三十载，贯通上下五千年。学会了解自己，评价世界。台湾小鲁镇社之宝（步印童书馆出品） 童书畅销榜5折封顶>>','作者:陈卫平','出版社:新世界出版社',80,150123456789,2,false),
+(NULL,'写给儿童的中国地理（全14册）','超级畅销书《写给儿童的中国历史》姊妹篇。14个自然区界，16幅细腻绘制的地形图，2000张景观图片，3000个风物典故，揭示地理的丰富有趣与诗意，让孩子亲近祖国大地，探索地理中的故事（步印童书馆出品） 童书畅销榜5折封顶>>','作者:陈卫平、陈雨岚、王存立、刘兴诗等','出版社:新世界出版社',60,150123456789,3,true),
+(NULL,'语文素养读本小学卷套装(全12本）','第十届文津奖获奖图书,畅销台湾三十载,贯通上下五千年。学会了解自己，评价世界。台湾小鲁镇社之宝（步印童书馆出品） 童书畅销榜5折封顶>>','作者:陈卫平','出版社:新世界出版社',50,150123456789,2,false),
+(NULL,'儿童创意美术：各种各样的脸（套装共3册）','儿童版“秘密花园”，30所全国优秀美术学校倾力推荐并做范画，赠送绘画指导手册 童书畅销榜5折封顶>>','作者:沙丁猫 编','出版社:化学工业出版社',50,150123456789,2,false),
+(NULL,'新概念英语全套装','赠《新概念英语语法手册》及《新概念英语技能大赛视频光盘》————风靡全球的英语学习经典教材 本商品不参加促销 活动商品请点击进入','作者:(英)路易 亚历山大，何其莘　著','出版社:外语教学与研究出版社',45,150123456789,2,false),
+(NULL,'东野圭吾新作：白金数据（凶手，竟然是我自己？！）','凶手，竟然是我自己；拥有值得反复思考的深度，远远超越“推理小说”范畴。《嫌疑人X的献身》之后，推理天王东野圭吾烧脑巨献。二宫和也主演同名电影原著小说，日文版狂销170万册.','作者:憨爸','出版社:中国妇女出版社',45,150123456789,2,true),
+(NULL,'硅谷工程师爸爸的超强思维训练课','“憨爸在美国”公众号数十万粉丝翘首期待的思维训练法 理工科学霸、硅谷工程师爸爸分享的独家教育方案 老板催我交总结，生活榜单来汇报>>','作者:(英)路易 亚历山大，何其莘　著','出版社:外语教学与研究出版社',45,150123456789,2,false),
+(NULL,'努力，是为遇见更好的自己','经典美文！《读者》六年典藏精选·美文彩插系列','作者:读者杂志社','出版社:时代文艺出版社',45,150123456789,2,false),
+(NULL,'小学问：解决你的7种人生焦虑','福利：1月4日-1月8日，预订马东团队新书《小学问》即可得35元礼券（可用于磨铁图书全品满200使用）折上满减，多...','作者：马薇薇,邱晨,周玄毅,黄执中,胡渐彪','出  版  社：北京联合出版有限公司',45,150123456789,2,false),
+(NULL,'生活需要仪式感 （你可以活得更高级，把温暖和感动带给你在乎的人）','拥有仪式感，你才能真正成为有爱、有温度、有人情味的人，得到认可与尊重，收获惊喜、浪漫、幸运和精彩。人民日报强烈呼吁，3000家媒体感动推荐，5亿人热情参与，写给有心改变却失去方向的人。》','作者:李思圆','出版社:山东文艺出版社',45,150123456789,2,false),
+INSERT INTO ty_book_pic VALUES
+(NULL, 1, 'img/sm/ds.jpg','img/md/dm.jpg','img/lg/db.jpg'),
+ (NULL, 1, 'img/sm/es.jpg','img/md/em.jpg','img/lg/eb.jpg'),
+ (NULL, 1, 'img/sm/hs.jpg','img/md/hm.jpg','img/lg/hb.jpg'),
+ (NULL, 2, 'img/sm/ms.jpg','img/md/mm.jpg','img/lg/mb.jpg'),
+ (NULL, 3, 'img/sm/tss.jpg','img/md/tsm.jpg','img/lg/tsb.jpg'),
+ (NULL, 3, 'img/sm/tys.jpg','img/md/tym.jpg','img/lg/tyb.jpg'),
+ (NULL, 3, 'img/sm/tzs.jpg','img/md/tzm.jpg','img/lg/tzb.jpg'),
+(NULL, 3, 'img/sm/700s.jpg','img/md/700m.jpg','img/lg/700b.jpg'),
+ (NULL, 3, 'img/sm/5500s.jpg','img/md/5500m.jpg','img/lg/5500b.jpg'),
+ (NULL, 3, 'img/sm/as.jpg','img/md/am.jpg','img/lg/ab.jpg'),
+ (NULL, 3, 'img/sm/blues.jpg','img/md/bluem.jpg','img/lg/blueb.jpg'),
+ (NULL, 3, 'img/sm/chils.jpg','img/md/chilm.jpg','img/lg/chilb.jpg'),
+ (NULL, 3, 'img/sm/chiles.jpg','img/md/chilem.jpg','img/lg/chileb.jpg')
